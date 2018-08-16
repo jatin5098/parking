@@ -2,7 +2,7 @@
   [latitude]="lat" 
   [longitude]="lng" 
   [zoom]="zoom"
-  [styles]="styles">
+  [styles]="theme == 'light' ? styles : darkStyle">
   <div *ngFor="let points of data?.features">
   <agm-marker
     *ngIf="points" 
@@ -22,6 +22,12 @@
   </div>
 </agm-map>
 <div class="properties-overview">
+  <div class="theme">
+    <button>
+      <span *ngIf="theme == 'light'" (click)="changeTheme(theme)">Dark Theme</span>
+      <span *ngIf="theme == 'dark'" (click)="changeTheme(theme)">Light Theme</span>
+    </button>
+  </div>
   <div class="color-indicator">
     <span class="color green"></span> <span class="text">Available</span>
     <span class="color red"></span> <span class="text">Un-available</span>

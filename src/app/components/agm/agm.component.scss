@@ -5,8 +5,8 @@ select {
 }
 
 .color-indicator {
-    text-align: center;
-    
+    // text-align: center;
+
     .color {
         height: 24px;
         width: 24px;
@@ -27,5 +27,20 @@ select {
         position: relative;
         top: -12px;
         margin-right: 4px;
+    }
+}
+
+.theme {
+    text-align: right;
+    position: absolute;
+    width: 100%;
+    right: 20px;
+
+    button {
+        background: #fff;
+        color: #333;
+        border: 1px solid #333;
+        border-radius: 5px;
+        padding: 4px 8px;
     }
 }
