@@ -35,12 +35,13 @@ select {
     position: absolute;
     width: 100%;
     right: 20px;
-
+    
     button {
         background: #fff;
         color: #333;
         border: 1px solid #333;
         border-radius: 5px;
         padding: 4px 8px;
+        cursor: pointer;
     }
 }
