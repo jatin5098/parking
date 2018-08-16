@@ -12,10 +12,10 @@
     [iconUrl]="getLocation(points)">
     <agm-info-window>
       <div><span>Title:</span> {{points.properties.title}}</div>
-      <div><span>Total Short Space:</span> {{points.properties.layers['parking.garage'].data.ShortCapacity}}</div>
-      <div><span>Free Short Space:</span> {{points.properties.layers['parking.garage'].data.FreeSpaceShort}}</div>
-      <div><span>Total Long Space:</span> {{points.properties.layers['parking.garage'].data.LongCapacity}}</div>
-      <div><span>Free Long Space:</span> {{points.properties.layers['parking.garage'].data.FreeSpaceLong}}</div>
+      <div><span>Total Short Space:</span> {{points.properties.layers['parking.garage'].data.ShortCapacity == undefined ? 'NA' : points.properties.layers['parking.garage'].data.ShortCapacity}}</div>
+      <div><span>Free Short Space:</span> {{points.properties.layers['parking.garage'].data.FreeSpaceShort == undefined ? 'NA' : points.properties.layers['parking.garage'].data.FreeSpaceShort}}</div>
+      <div><span>Total Long Space:</span> {{points.properties.layers['parking.garage'].data.LongCapacity == undefined ? 'NA' : points.properties.layers['parking.garage'].data.LongCapacity}}</div>
+      <div><span>Free Long Space:</span> {{points.properties.layers['parking.garage'].data.FreeSpaceLong == undefined ? 'NA' : points.properties.layers['parking.garage'].data.FreeSpaceLong}}</div>
     </agm-info-window>
   </agm-marker>
   </div>
