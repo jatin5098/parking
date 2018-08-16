@@ -25,8 +25,8 @@
     <span class="color green"></span> <span class="text">Available</span>
     <span class="color red"></span> <span class="text">Un-available</span>
   </div>
-  <select style="width: 100%; display: block;" [(ngModel)]="selectedPoint.properties.title">
-    <option *ngFor="let item of data?.features" value={{item?.properties.title}}>{{item.properties.title}}</option>
+  <select style="width: 100%; display: block;" [(ngModel)]="selectedPoint">
+    <option *ngFor="let item of data?.features" [ngValue]="item">{{item.properties.title}}</option>
   </select>
 
   <div class="parkingName"><strong>Parking Name:</strong> {{selectedPoint.properties.title}}</div>
