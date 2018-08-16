@@ -7,12 +7,14 @@ body {
 .gm-style-iw {
     > div {
         padding: 10px 16px;
+        border: 2px solid green;
+        border-radius: 5px;
 
         .agm-info-window-content {
             > div {
                 span {
                     font-weight: 500;
-                    width: 170px;
+                    width: 140px;
                     display: inline-block;
                     line-height: 20px;
                 }

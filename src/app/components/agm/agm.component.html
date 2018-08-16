@@ -22,8 +22,8 @@
 </agm-map>
 <div class="properties-overview">
   <div class="color-indicator">
-    <span class="color green"></span>
-    <span class="color red"></span>
+    <span class="color green"></span> <span class="text">Available</span>
+    <span class="color red"></span> <span class="text">Un-available</span>
   </div>
   <select style="width: 100%; display: block;" [(ngModel)]="selectedPoint.properties.title">
     <option *ngFor="let item of data?.features" value={{item?.properties.title}}>{{item.properties.title}}</option>
