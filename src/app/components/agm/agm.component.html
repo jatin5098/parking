@@ -1,0 +1,16 @@
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" class="propertiesOpened">
+  <agm-marker
+    *ngFor="let points of data?.features" (markerClick)="showData(points)"
+    [latitude]="points.geometry.coordinates[1]" [longitude]="points.geometry.coordinates[0]" [label]="label">
+    <agm-info-window>
+      <div>{{points.properties.title}}</div>
+      <div>{{points.properties.layers['parking.garage'].data.FreeSpaceShort}}</div>
+      <div>{{points.properties.layers['parking.garage'].data.FreeSpaceLong}}</div>
+    </agm-info-window>
+  </agm-marker>
+</agm-map>
+<div class="properties-overview">
+  <select style="width: 100%; display: block;">
+    <option *ngFor="let item of data?.features">{{item.properties.title}}</option>
+  </select>
+</div>
