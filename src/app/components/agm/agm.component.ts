@@ -16,9 +16,10 @@ export class AgmComponent implements OnInit {
   private label: string = '';
 
   private data: any;
+  private selectedPoint:any;
   // markers
   private markers: any[] = [];
-  private points: any;
+  private points: any = {};
 
   constructor(
     private http: Http,
@@ -37,6 +38,7 @@ export class AgmComponent implements OnInit {
 
   showData(points) {
     this.points = points;
+    // this.selectedPoint = points;
     console.log(this.points);
   }
 
@@ -44,7 +46,8 @@ export class AgmComponent implements OnInit {
     this.getParkingDetails().subscribe(
       res => {
         this.data = res;
-        console.log(this.data.features);       
+        console.log(this.data.features);
+        this.selectedPoint = this.data.features[0]; 
       },
       error => {
        
@@ -53,5 +56,23 @@ export class AgmComponent implements OnInit {
        
       }
     );
+  }
+
+  getLocation(points) {
+    let shortAvailable = points.properties.layers['parking.garage'].data.FreeSpaceShort;
+    let longAvailable = points.properties.layers['parking.garage'].data.FreeSpaceLong;
+
+    if( shortAvailable > 0 && longAvailable > 0 ) {
+      return '../../../assets/images/sAlA.png';
+    }
+    else if ( (!shortAvailable || shortAvailable == 0) && (!longAvailable || longAvailable == 0) ) {
+      return '../../../assets/images/sUlU.png';
+    }
+    else if ( (!shortAvailable || shortAvailable == 0) && longAvailable > 0 ) {
+      return '../../../assets/images/sUlA.png';
+    }
+    else if ( shortAvailable > 0 && (!longAvailable || longAvailable == 0) ) {
+      return '../../../assets/images/sAlU.png';
+    }
   }
 }
