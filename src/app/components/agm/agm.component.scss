@@ -1,9 +1,14 @@
+
 select {
     height: 32px;
     padding: 4px 8px;
     border-radius: 5px;
 }
-
+.parking-selector {
+    width: 85%;
+    display: inline-block;
+    margin-right: 10px;
+}
 .color-indicator {
     // text-align: center;
 
@@ -31,8 +36,10 @@ select {
 }
 
 .theme {
-    text-align: right;
-    position: absolute;
+    text-align: left;
+    position: fixed;
+    top: 15px;
+    left: 15px;
     width: 100%;
     right: 20px;
     

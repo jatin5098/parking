@@ -8,11 +8,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AgmComponent } from './components/agm/agm.component';
+import { OverlayGridComponent } from './components/overlay-grid/overlay-grid.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AgmComponent
+    AgmComponent,
+    OverlayGridComponent
   ],
   imports: [
     BrowserModule,

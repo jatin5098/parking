@@ -1,0 +1,36 @@
+<div class="app-overlay-grid">
+  <div class="grid">
+    <div class="button-panel">
+      <span class="close-button" (click)="closeOverlay()">&times;</span>
+    </div>
+    <div class="grid-box">
+        <table>
+            <thead>
+              <tr>
+                <th>Parking Name</th>
+                <th>Total Short Space</th>
+                <th>Free Short Space</th>
+                <th>Total Long Space</th>
+                <th>Free Long Space</th>          
+              </tr>
+              <tr>
+                <td colspan="5">
+                  <div class="search-box-container">
+                    <input type="text" name="grid-filter" placeholder="Search by Title" class="search-box" [(ngModel)]="gridFilter" (keyup)="filterGridData()"/>
+                  </div>
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let points of filterData?.features">
+                <td class="title">{{points.properties.title}}</td>
+                <td>{{points.properties.layers['parking.garage'].data.ShortCapacity == undefined ? 'NA' : points.properties.layers['parking.garage'].data.ShortCapacity}}</td>
+                <td>{{points.properties.layers['parking.garage'].data.FreeSpaceShort == undefined ? 'NA' : points.properties.layers['parking.garage'].data.FreeSpaceShort}}</td>
+                <td>{{points.properties.layers['parking.garage'].data.LongCapacity == undefined ? 'NA' : points.properties.layers['parking.garage'].data.LongCapacity}}</td>
+                <td>{{points.properties.layers['parking.garage'].data.FreeSpaceLong == undefined ? 'NA' : points.properties.layers['parking.garage'].data.FreeSpaceLong}}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+  </div>
+</div>

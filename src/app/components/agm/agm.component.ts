@@ -10,24 +10,29 @@ import { HttpClient } from  '@angular/common/http';
 })
 export class AgmComponent implements OnInit {
 
-  private lat: number = 52.3702;
-  private lng: number = 4.8952;
-  private zoom: number = 12;
-  private label: string = '';
+  public lat: number = 52.3702;
+  public lng: number = 4.8952;
+  public zoom: number = 12;
+  public label: string = '';
+  public infoWindowOpened:boolean = null;
+  public data: any;
+  public selectedPoint:any;
+  public isActiveOverlay: boolean;
+  public openedWindow: number;
 
-  private data: any;
-  private selectedPoint:any;
   // markers
-  private markers: any[] = [];
-  private points: any = {};
-  private theme: string = "light";
-  styles:any = [];
-  darkStyle:any =[];
+  public markers: any[] = [];
+  public points: any = {};
+  public theme: string;
+  public styles:any = [];
+  public darkStyle:any =[];
 
   constructor(
     private http: Http,
     private  httpClient:  HttpClient
-  ) { }
+  ) {
+    this.theme = "light";
+   }
 
   ngOnInit() {
     this.details();
@@ -422,15 +427,14 @@ export class AgmComponent implements OnInit {
 
   showData(points) {
     this.points = points;
-    // this.selectedPoint = points;
-    console.log(this.points);
+    this.selectedPoint = points;
   }
 
   details() {
     this.getParkingDetails().subscribe(
       res => {
         this.data = res;
-        console.log(this.data.features);
+        this.data.isActiveOverlay = false;
         this.selectedPoint = this.data.features[0]; 
       },
       error => {
@@ -467,5 +471,24 @@ export class AgmComponent implements OnInit {
     else {
       this.theme = 'dark';
     }
+  }
+
+  openGrid() {
+    this.data.isActiveOverlay = true;
+  }
+  
+  openWindow() {
+    let point;
+    this.data.features.forEach((e, i, a) => {
+      if (e === this.selectedPoint) {
+        point = i;
+        return;
+      }
+    });
+    this.openedWindow = point;
+  }
+
+  isInfoWindowOpen(id) {
+    return this.openedWindow == id;
   }
 }

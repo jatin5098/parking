@@ -1,27 +1,30 @@
 # Parking
 
+# Features
+
+From UX perpective: 
+    * Provided all the data in grid with search capability for easy filtering.
+    * Selection of items in dropdown, auto focuses the marker in map alongwith opening its info window.
+    * Provided light and dark theme support for User's preference.
+    * Responsive design.
+
+
+# Technologies
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.3.
+Application uses AGM - Angular Google Maps
+
 
 ## Development server
-
+(To run the development package)
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
 ## Build
-
+(To build and run the production package.)
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## P.S.:
+If not interested to run development environment, 
+* Please go to `dist/parking`
+* Run command prompt from the same folder and type in following `http-server -p 4200` (Please do `npm i http-server -g` if not yet done or returns any error )
+* Now go to browser and open the following link `localhost:4200`

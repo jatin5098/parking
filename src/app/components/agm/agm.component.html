@@ -3,15 +3,19 @@
   [longitude]="lng" 
   [zoom]="zoom"
   [styles]="theme == 'light' ? styles : darkStyle">
-  <div *ngFor="let points of data?.features">
+  <div *ngFor="let points of data?.features; let i=index">
   <agm-marker
     *ngIf="points" 
-    (markerClick)="showData(points)"
+    (markerClick)="showData(points); openWindow();"
     [latitude]="points.geometry.coordinates[1]" 
     [longitude]="points.geometry.coordinates[0]" 
     [label]="label" 
     [iconUrl]="getLocation(points)">
-    <agm-info-window>
+    <agm-info-window #infoWindow
+      [isOpen]="isInfoWindowOpen(i)"
+      [latitude]="points.geometry.coordinates[1]" 
+      [longitude]="points.geometry.coordinates[0]"
+      >
       <div><span>Title:</span> {{points.properties.title}}</div>
       <div><span>Total Short Space:</span> {{points.properties.layers['parking.garage'].data.ShortCapacity == undefined ? 'NA' : points.properties.layers['parking.garage'].data.ShortCapacity}}</div>
       <div><span>Free Short Space:</span> {{points.properties.layers['parking.garage'].data.FreeSpaceShort == undefined ? 'NA' : points.properties.layers['parking.garage'].data.FreeSpaceShort}}</div>
@@ -21,24 +25,42 @@
   </agm-marker>
   </div>
 </agm-map>
-<div class="properties-overview">
-  <div class="theme">
+
+<!-- Map Theme -->
+<div class="theme">
     <button>
       <span *ngIf="theme == 'light'" (click)="changeTheme(theme)">Dark Theme</span>
       <span *ngIf="theme == 'dark'" (click)="changeTheme(theme)">Light Theme</span>
     </button>
   </div>
+
+  <!-- Parking Details -->
+<div class="properties-overview">
   <div class="color-indicator">
     <span class="color green"></span> <span class="text">Available</span>
     <span class="color red"></span> <span class="text">Un-available</span>
   </div>
-  <select style="width: 100%; display: block;" [(ngModel)]="selectedPoint">
-    <option *ngFor="let item of data?.features" [ngValue]="item">{{item.properties.title}}</option>
-  </select>
+  <div>
+    <select
+      class="parking-selector" 
+      [(ngModel)]="selectedPoint"
+      (change)="openWindow()">
+      <option *ngFor="let item of data?.features" [ngValue]="item">{{item.properties.title}}</option>
+    </select>
+    <a href="javascript: void(0);" (click)="openGrid()">Grid</a>
+  </div>
 
   <div *ngIf="selectedPoint" class="parkingName"><strong>Parking Name:</strong> {{selectedPoint.properties.title}}</div>
   <div *ngIf="selectedPoint" class="shortAvailable"><strong>Short Parking Total:</strong> {{selectedPoint.properties.layers['parking.garage'].data.ShortCapacity == undefined ? 'NA' : selectedPoint.properties.layers['parking.garage'].data.ShortCapacity}}</div>
   <div *ngIf="selectedPoint" class="shortAvailable"><strong>Short Parking Available:</strong> {{selectedPoint.properties.layers['parking.garage'].data.FreeSpaceShort == undefined ? 'NA' : selectedPoint.properties.layers['parking.garage'].data.FreeSpaceShort}}</div>
   <div *ngIf="selectedPoint" class="longAvailable"><strong>Long Parking Total:</strong> {{selectedPoint.properties.layers['parking.garage'].data.LongCapacity == undefined ? 'NA' : selectedPoint.properties.layers['parking.garage'].data.LongCapacity}}</div>
   <div *ngIf="selectedPoint" class="longAvailable"><strong>Long Parking Available:</strong> {{selectedPoint.properties.layers['parking.garage'].data.FreeSpaceLong == undefined ? 'NA' : selectedPoint.properties.layers['parking.garage'].data.FreeSpaceLong}}</div>
+</div>
+
+<!-- Overlay Grid -->
+<div *ngIf="this.data?.features.length && this.data?.isActiveOverlay">
+  <app-overlay-grid
+    class="app-overlay-grid"
+    [data]="data"
+    ></app-overlay-grid>
 </div>
